@@ -1,0 +1,9 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: student_practice_postgres
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: practice_db
+    ports:
+      - "5435:5432"
