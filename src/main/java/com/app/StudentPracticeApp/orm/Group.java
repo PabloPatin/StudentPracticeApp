@@ -20,9 +20,6 @@ public class Group {
     @Column(nullable = false)
     private Short course;
 
-    private LocalDate practiceStart;
-    private LocalDate practiceEnd;
-
     @ManyToOne
     @JoinColumn(name = "teacher_groups", nullable = false)
     private Teacher curator;
