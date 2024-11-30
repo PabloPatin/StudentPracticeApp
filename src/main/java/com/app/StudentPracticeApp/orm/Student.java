@@ -1,6 +1,6 @@
 package com.app.StudentPracticeApp.orm;
 
-import com.app.StudentPracticeApp.utils.Hasher;
+import com.app.StudentPracticeApp.services.PasswordService;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class Student {
         this.fullName = fullName;
         this.group = group;
         this.login = login;
-        this.passwordHash = Hasher.hashPassword(password);
+        this.passwordHash = new PasswordService().encodePassword(password);
     }
 
     public Student(String fullName, String skills, Group group, Practice practice, String hometown) {
