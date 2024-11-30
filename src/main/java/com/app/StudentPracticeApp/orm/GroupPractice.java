@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,16 +16,22 @@ public class GroupPractice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private Short year;
+
+    @Column(nullable = false)
+    private LocalDate startDate;
+
+    @Column(nullable = false)
+    private LocalDate endDate;
+
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
-    private Teacher curator;
-
-    private LocalDate practiceStart;
-    private LocalDate practiceEnd;
+    @JoinColumn(name = "curator_id", nullable = false)
+    private Curator curator;
 
     @OneToMany(mappedBy = "groupPractice", cascade = CascadeType.ALL)
     private List<Practice> practices = new ArrayList<>();
@@ -34,14 +39,12 @@ public class GroupPractice {
     protected GroupPractice() {
     }
 
-    public GroupPractice(Group group, Teacher curator, LocalDate practiceStart, LocalDate practiceEnd) {
+    public GroupPractice(Group group, Curator curator, LocalDate startDate, LocalDate endDate) {
         this.group = group;
         this.curator = curator;
-        this.practiceStart = practiceStart;
-        this.practiceEnd = practiceEnd;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
-
-    // Геттеры и сеттеры
 
     public Long getId() {
         return id;
@@ -55,28 +58,36 @@ public class GroupPractice {
         this.group = group;
     }
 
-    public Teacher getCurator() {
+    public Curator getCurator() {
         return curator;
     }
 
-    public void setCurator(Teacher curator) {
+    public void setCurator(Curator curator) {
         this.curator = curator;
     }
 
-    public LocalDate getPracticeStart() {
-        return practiceStart;
+    public Short getYear() {
+        return year;
     }
 
-    public void setPracticeStart(LocalDate practiceStart) {
-        this.practiceStart = practiceStart;
+    public void setYear(Short year) {
+        this.year = year;
     }
 
-    public LocalDate getPracticeEnd() {
-        return practiceEnd;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setPracticeEnd(LocalDate practiceEnd) {
-        this.practiceEnd = practiceEnd;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public List<Practice> getPractices() {
@@ -85,6 +96,10 @@ public class GroupPractice {
 
     public void setPractices(List<Practice> practices) {
         this.practices = practices;
+    }
+
+    public void addPractices(Practice practice){
+        this.practices.add(practice);
     }
 }
 

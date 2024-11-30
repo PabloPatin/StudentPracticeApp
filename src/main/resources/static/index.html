@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на практику</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Основные цвета */
+        :root {
+            --main-color: #ff7f32; /* оранжевый */
+            --secondary-color: #32b761; /* зелёный */
+            --accent-color: #73c8e4; /* мягкий голубой */
+        }
+
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--main-color);
+        }
+
+        .navbar-brand {
+            color: white !important;
+        }
+
+        .btn-main {
+            background-color: var(--main-color);
+            color: white;
+        }
+
+        .btn-main:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .card-header {
+            background-color: var(--accent-color);
+        }
+
+        .card-body {
+            background-color: white;
+        }
+
+        .footer {
+            background-color: var(--main-color);
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Навигация -->
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">Запись на практику</a>
+</nav>
+
+<!-- Главная карточка -->
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h5>Запись на практику</h5>
+        </div>
+        <div class="card-body">
+            <p>Добро пожаловать в систему записи на производственную практику студентов!</p>
+            <button class="btn btn-main" onclick="handleClick()">Записаться</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Университет</p>
+</div>
+
+<script>
+    function handleClick() {
+        alert("Запись на практику выполнена!");
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

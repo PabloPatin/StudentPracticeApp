@@ -11,15 +11,14 @@ public class PreparationNote {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDate date; // Дата заметки
+    private LocalDate date;
 
-    @Lob
     @Column(nullable = false)
-    private String note; // Текст заметки
+    private String note;
 
     @ManyToOne
     @JoinColumn(name = "practice_id", nullable = false)
-    private Practice practice; // Связь с объектом Practice
+    private Practice practice;
 
     protected PreparationNote() {
     }

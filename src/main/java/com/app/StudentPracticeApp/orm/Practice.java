@@ -3,6 +3,8 @@ package com.app.StudentPracticeApp.orm;
 import jakarta.persistence.*;
 
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Practice {
@@ -27,16 +29,26 @@ public class Practice {
     private Department department;
 
     @ManyToOne
-    @JoinColumn(name = "contact_id")
+    @JoinColumn(name = "contact_id", nullable = false)
     private Contact companyMentor;
 
-    @Lob
-    private String studentFeedback;
+    @OneToOne()
+    private Feedback studentFeedback;
 
-    @Lob
-    private String notes;
+    @OneToMany(mappedBy = "practice")
+    private List<PreparationNote> preparationNotes = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PracticeStatus status = PracticeStatus.UNKNOWN;;
+
 
     protected Practice() {
+    }
+
+    public Practice(Student student, GroupPractice groupPractice) {
+        this.student = student;
+        this.groupPractice = groupPractice;
     }
 
     public Practice(Student student, GroupPractice groupPractice, Company company, Contact companyMentor) {
@@ -46,7 +58,13 @@ public class Practice {
         this.companyMentor = companyMentor;
     }
 
-    // Геттеры и сеттеры
+    public Practice(Student student, GroupPractice groupPractice, Company company, Department department, Contact companyMentor) {
+        this.student = student;
+        this.groupPractice = groupPractice;
+        this.company = company;
+        this.department = department;
+        this.companyMentor = companyMentor;
+    }
 
     public Long getId() {
         return id;
@@ -92,20 +110,28 @@ public class Practice {
         this.companyMentor = companyMentor;
     }
 
-    public String getStudentFeedback() {
+    public Feedback getStudentFeedback() {
         return studentFeedback;
     }
 
-    public void setStudentFeedback(String studentFeedback) {
+    public void setStudentFeedback(Feedback studentFeedback) {
         this.studentFeedback = studentFeedback;
     }
 
-    public String getNotes() {
-        return notes;
+    public List<PreparationNote> getPreparationNotes() {
+        return preparationNotes;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setPreparationNotes(List<PreparationNote> notes) {
+        this.preparationNotes = notes;
+    }
+
+    public PracticeStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PracticeStatus status) {
+        this.status = status;
     }
 }
 

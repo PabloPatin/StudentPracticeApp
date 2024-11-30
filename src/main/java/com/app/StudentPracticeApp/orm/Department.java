@@ -13,14 +13,18 @@ public class Department {
 
     @Column(nullable = false)
     private String name;
-    private String address;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    private List<Contact> contacts = new ArrayList<>();
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
+
+    @OneToMany(mappedBy = "department")
+    private List<Contact> contacts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "department")
+    private List<Feedback> feedbacks = new ArrayList<>();
 
     protected Department() {
     }
@@ -34,6 +38,10 @@ public class Department {
         this.company = company;
         this.name = name;
         this.address = address;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -70,5 +78,19 @@ public class Department {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
+    public void addFeedback(Feedback feedback){
+        this.feedbacks.add(feedback);
+        feedback.setDepartment(this);
+        feedback.setCompany(this.getCompany());
     }
 }

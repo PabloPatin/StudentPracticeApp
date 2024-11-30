@@ -13,37 +13,28 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String faculty;
+
     @Column(nullable = false)
     private Short course;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_groups", nullable = false)
-    private Teacher curator;
+    @OneToMany(mappedBy = "group")
+    private List<GroupPractice> groupPractices = new ArrayList<>();
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "group")
     private List<Student> students = new ArrayList<>();
 
     protected Group() {
     }
 
-    public Group(String name, String faculty, Short course, Teacher curator) {
+    public Group(String name, String faculty, Short course) {
         this.name = name;
         this.faculty = faculty;
         this.course = course;
-        this.curator = curator;
-    }
-
-    public Group(String name, String faculty, Short course, LocalDate practiceStart, LocalDate practiceEnd, Teacher curator) {
-        this.name = name;
-        this.faculty = faculty;
-        this.course = course;
-        this.practiceStart = practiceStart;
-        this.practiceEnd = practiceEnd;
-        this.curator = curator;
     }
 
     public Long getId() {
@@ -74,31 +65,6 @@ public class Group {
         this.course = course;
     }
 
-    public LocalDate getPracticeStart() {
-        return practiceStart;
-    }
-
-    public void setPracticeStart(LocalDate practiceStart) {
-        this.practiceStart = practiceStart;
-    }
-
-    public LocalDate getPracticeEnd() {
-        return practiceEnd;
-    }
-
-    public void setPracticeEnd(LocalDate practiceEnd) {
-        this.practiceEnd = practiceEnd;
-    }
-
-    public Teacher getCurator() {
-        return curator;
-    }
-
-    public void setCurator(Teacher curator) {
-        this.curator = curator;
-        curator.addGroup(this);
-    }
-
     public List<Student> getStudents() {
         return students;
     }
@@ -106,4 +72,21 @@ public class Group {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
-}
+
+    public void addStudent(Student student){
+        this.students.add(student);
+        student.setGroup(this);
+    }
+
+    public void removeStudent(Student student){
+        this.students.remove(student);
+    }
+
+    public List<GroupPractice> getGroupPractices() {
+        return groupPractices;
+    }
+
+    public void setGroupPractices(List<GroupPractice> groupPractices) {
+        this.groupPractices = groupPractices;
+    }}
+

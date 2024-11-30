@@ -17,6 +17,7 @@ public class Contact {
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
+
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;

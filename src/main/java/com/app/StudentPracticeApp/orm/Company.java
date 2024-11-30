@@ -12,15 +12,19 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
+
     private String address;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company")
+    private List<Department> departments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "company")
     private List<Contact> contacts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private List<Department> departments = new ArrayList<>();
+    @OneToMany(mappedBy = "company")
+    private List<Feedback> feedbacks = new ArrayList<>();
 
     protected Company() {
     }
@@ -34,8 +38,8 @@ public class Company {
         this.address = address;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return this.id;
     }
 
     @NonNull
@@ -69,5 +73,18 @@ public class Company {
 
     public void setDepartments(List<Department> departments) {
         this.departments = departments;
+    }
+
+    public List<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(List<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
+    }
+
+    public void addFeedback(Feedback feedback){
+        this.feedbacks.add(feedback);
+        feedback.setCompany(this);
     }
 }
