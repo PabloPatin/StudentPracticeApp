@@ -26,8 +26,8 @@ public class GroupPractice {
     private LocalDate endDate;
 
     @ManyToOne
-    @JoinColumn(name = "group_id", nullable = false)
-    private Group group;
+    @JoinColumn(name = "student_group_id", nullable = false)
+    private StudentGroup group;
 
     @ManyToOne
     @JoinColumn(name = "curator_id", nullable = false)
@@ -39,7 +39,7 @@ public class GroupPractice {
     protected GroupPractice() {
     }
 
-    public GroupPractice(Group group, Curator curator, LocalDate startDate, LocalDate endDate) {
+    public GroupPractice(StudentGroup group, Curator curator, LocalDate startDate, LocalDate endDate) {
         this.group = group;
         this.curator = curator;
         this.startDate = startDate;
@@ -50,11 +50,11 @@ public class GroupPractice {
         return id;
     }
 
-    public Group getGroup() {
+    public StudentGroup getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(StudentGroup group) {
         this.group = group;
     }
 

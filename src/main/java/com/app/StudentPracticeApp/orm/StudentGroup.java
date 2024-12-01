@@ -2,13 +2,11 @@ package com.app.StudentPracticeApp.orm;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Group {
+public class StudentGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,10 +26,10 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Student> students = new ArrayList<>();
 
-    protected Group() {
+    protected StudentGroup() {
     }
 
-    public Group(String name, String faculty, Short course) {
+    public StudentGroup(String name, String faculty, Short course) {
         this.name = name;
         this.faculty = faculty;
         this.course = course;

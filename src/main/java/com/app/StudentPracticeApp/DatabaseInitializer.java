@@ -18,24 +18,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-@Component
-public class DatabaseInitializer {
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @PostConstruct
-    public void init() {
-        String scriptPath = "src/main/sql/init_triggers.sql";
-        try {
-            // Читаем SQL-скрипт из файла
-            String sqlScript = new String(Files.readAllBytes(Paths.get(new URI(scriptPath))));
-
-            // Выполняем SQL-скрипт с триггерами
-            jdbcTemplate.execute(sqlScript);
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-            // Обработать ошибку
-        }
-    }
-}
+//@Component
+//public class DatabaseInitializer {
+//
+//    @Autowired
+//    private JdbcTemplate jdbcTemplate;
+//
+//    @PostConstruct
+//    public void init() {
+//        String scriptPath = "src/main/sql/init_triggers.sql";
+//        try {
+//            // Читаем SQL-скрипт из файла
+//            String sqlScript = new String(Files.readAllBytes(Paths.get(new URI(scriptPath))));
+//
+//            // Выполняем SQL-скрипт с триггерами
+//            jdbcTemplate.execute(sqlScript);
+//        } catch (IOException | URISyntaxException e) {
+//            e.printStackTrace();
+//            // Обработать ошибку
+//        }
+//    }
+//}

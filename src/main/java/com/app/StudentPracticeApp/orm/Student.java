@@ -24,8 +24,8 @@ public class Student {
     private String skills;
 
     @ManyToOne
-    @JoinColumn(name = "group_id", nullable = false)
-    private Group group;
+    @JoinColumn(name = "student_group_id", nullable = false)
+    private StudentGroup group;
 
     @OneToMany(mappedBy = "student")
     private List<Practice> practices;
@@ -33,14 +33,14 @@ public class Student {
     protected Student() {
     }
 
-    public Student(String fullName, Group group, String login, String password) {
+    public Student(String fullName, StudentGroup group, String login, String password) {
         this.fullName = fullName;
         this.group = group;
         this.login = login;
         this.passwordHash = new PasswordService().encodePassword(password);
     }
 
-    public Student(String fullName, String skills, Group group, Practice practice, String hometown) {
+    public Student(String fullName, String skills, StudentGroup group, Practice practice, String hometown) {
         this.fullName = fullName;
         this.skills = skills;
         this.group = group;
@@ -75,11 +75,11 @@ public class Student {
         this.skills = skills;
     }
 
-    public Group getGroup() {
+    public StudentGroup getGroup() {
         return group;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(StudentGroup group) {
         this.group = group;
     }
 

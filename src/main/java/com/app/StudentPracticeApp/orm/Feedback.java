@@ -1,7 +1,6 @@
 package com.app.StudentPracticeApp.orm;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
 
 @Entity
 public class Feedback {
