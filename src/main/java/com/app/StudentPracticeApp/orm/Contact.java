@@ -9,7 +9,7 @@ public class Contact {
     private Long id;
 
     @Column(nullable = false)
-    private String fullName;
+    private String name;
 
     private String email;
     private String phone;
@@ -25,33 +25,33 @@ public class Contact {
     protected Contact() {
     }
 
-    public Contact(String fullName, Company company) {
-        this.fullName = fullName;
+    public Contact(String name, Company company) {
+        this.name = name;
         this.company = company;
     }
 
 
-    public Contact(String fullName, String email, String phone, Company company) {
-        this.fullName = fullName;
+    public Contact(String name, String email, String phone, Company company) {
+        this.name = name;
         this.email = email;
         this.phone = phone;
         this.company = company;
     }
 
-    public Contact(String fullName, String email, String phone, Company company, Department department) {
-        this.fullName = fullName;
+    public Contact(String name, String email, String phone, Company company, Department department) {
+        this.name = name;
         this.email = email;
         this.phone = phone;
         this.company = company;
         this.department = department;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {

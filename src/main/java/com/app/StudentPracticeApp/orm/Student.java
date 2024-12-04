@@ -11,6 +11,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "site_user_id", nullable = false)
+    private User user;
+
     @Column(nullable = false)
     private String login;
 
@@ -20,8 +24,17 @@ public class Student {
     @Column(nullable = false)
     private String fullName;
 
-    private String hometown;
+    private String registration;
     private String skills;
+
+    private String email;
+    private String phone;
+
+    private String comments;
+
+    @ManyToOne
+    @JoinColumn(name = "competency_id", nullable = false)
+    private Competency competency;
 
     @ManyToOne
     @JoinColumn(name = "student_group_id", nullable = false)
@@ -40,11 +53,11 @@ public class Student {
         this.passwordHash = new PasswordService().encodePassword(password);
     }
 
-    public Student(String fullName, String skills, StudentGroup group, Practice practice, String hometown) {
+    public Student(String fullName, String skills, StudentGroup group, Practice practice, String registration) {
         this.fullName = fullName;
         this.skills = skills;
         this.group = group;
-        this.hometown = hometown;
+        this.registration = registration;
     }
 
     public Long getId() {
@@ -59,12 +72,12 @@ public class Student {
         this.fullName = fullName;
     }
 
-    public String getHometown() {
-        return hometown;
+    public String getRegistration() {
+        return registration;
     }
 
-    public void setHometown(String hometown) {
-        this.hometown = hometown;
+    public void setRegistration(String registration) {
+        this.registration = registration;
     }
 
     public String getSkills() {

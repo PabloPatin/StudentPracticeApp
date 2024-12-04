@@ -38,6 +38,9 @@ public class Practice {
     @OneToMany(mappedBy = "practice")
     private List<PreparationNote> preparationNotes = new ArrayList<>();
 
+    private Boolean hasReport;
+    private String studentPost;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PracticeStatus status = PracticeStatus.UNKNOWN;;

@@ -20,29 +20,32 @@ public class Feedback {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    @Lob
-    private String text;
+    private String companyRequirements;
+    private Boolean isPaid;
+    private String professionDemand;
+    private String courseWorkProfit;
+    private String practiceReview;
+    private String jobOffer;
+    private Boolean wantRepeat;
+    private Boolean canRepeat;
 
     protected Feedback() {
     }
 
-    public Feedback(Practice practice, String text) {
+    public Feedback(Practice practice) {
         this.practice = practice;
-        this.text = text;
     }
 
-    public Feedback(Practice practice, Company company, String text) {
+    public Feedback(Practice practice, Company company) {
         this.practice = practice;
         this.company = company;
         company.addFeedback(this);
-        this.text = text;
     }
 
-    public Feedback(Practice practice, Company company, Department department, String text) {
+    public Feedback(Practice practice, Company company, Department department) {
         this.practice = practice;
         this.company = company;
         this.department = department;
-        this.text = text;
     }
 
     public Long getId() {
@@ -71,13 +74,5 @@ public class Feedback {
 
     public void setDepartment(Department department) {
         this.department = department;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }

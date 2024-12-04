@@ -11,6 +11,10 @@ public class Curator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "site_user_id", nullable = false)
+    private User user;
+
     @Column(nullable = false)
     private String fullName;
 
