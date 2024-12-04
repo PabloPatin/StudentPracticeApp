@@ -17,10 +17,10 @@ public class Company {
 
     private String address;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Department> departments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Contact> contacts = new ArrayList<>();
 
     @OneToMany(mappedBy = "company")
@@ -86,5 +86,14 @@ public class Company {
     public void addFeedback(Feedback feedback){
         this.feedbacks.add(feedback);
         feedback.setCompany(this);
+    }
+
+    public void addDepartment(Department department) {
+        this.departments.add(department);
+    }
+
+    public void addContact(Contact contact) {
+        this.contacts.add(contact);
+        contact.setCompany(this);
     }
 }

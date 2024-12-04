@@ -20,7 +20,7 @@ public class Department {
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     private List<Contact> contacts = new ArrayList<>();
 
     @OneToMany(mappedBy = "department")
@@ -36,6 +36,7 @@ public class Department {
 
     public Department(String name, String address, Company company) {
         this.company = company;
+        company.addDepartment(this);
         this.name = name;
         this.address = address;
     }
@@ -70,6 +71,8 @@ public class Department {
 
     public void addContact(Contact contact){
         this.contacts.add(contact);
+        contact.setDepartment(this);
+        this.company.addContact(contact);
     }
 
     public Company getCompany() {
@@ -91,6 +94,6 @@ public class Department {
     public void addFeedback(Feedback feedback){
         this.feedbacks.add(feedback);
         feedback.setDepartment(this);
-        feedback.setCompany(this.getCompany());
+        this.company.addFeedback(feedback);
     }
 }

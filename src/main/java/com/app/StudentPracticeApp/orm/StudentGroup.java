@@ -14,8 +14,9 @@ public class StudentGroup {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String faculty;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "faculty_id", nullable = false)
+    private Faculty faculty;
 
     @Column(nullable = false)
     private Short course;
@@ -29,7 +30,7 @@ public class StudentGroup {
     protected StudentGroup() {
     }
 
-    public StudentGroup(String name, String faculty, Short course) {
+    public StudentGroup(String name, Faculty faculty, Short course) {
         this.name = name;
         this.faculty = faculty;
         this.course = course;
@@ -47,11 +48,11 @@ public class StudentGroup {
         this.name = name;
     }
 
-    public String getFaculty() {
+    public Faculty getFaculty() {
         return faculty;
     }
 
-    public void setFaculty(String faculty) {
+    public void setFaculty(Faculty faculty) {
         this.faculty = faculty;
     }
 

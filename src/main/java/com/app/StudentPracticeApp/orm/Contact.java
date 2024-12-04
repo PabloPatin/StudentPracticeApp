@@ -13,6 +13,7 @@ public class Contact {
 
     private String email;
     private String phone;
+    private String post;
 
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
@@ -30,20 +31,38 @@ public class Contact {
         this.company = company;
     }
 
-
     public Contact(String name, String email, String phone, Company company) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.company = company;
+        company.addContact(this);
     }
 
-    public Contact(String name, String email, String phone, Company company, Department department) {
+    public Contact(String name, String email, String phone, Department department) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.department = department;
+        department.addContact(this);
+    }
+
+    public Contact(String name, String email, String phone, String post, Department department) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.department = department;
+        department.addContact(this);
+        this.post = post;
+    }
+
+    public Contact(String name, String email, String phone, String post, Company company) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.company = company;
-        this.department = department;
+        company.addContact(this);
+        this.post = post;
     }
 
     public String getName() {
