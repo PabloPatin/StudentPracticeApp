@@ -1,5 +1,6 @@
 package com.project.PracticeApp.controllers;
 
+import com.project.PracticeApp.dto.PracticeDTO;
 import com.project.PracticeApp.dto.StudentDTO;
 import com.project.PracticeApp.orm.Competency;
 import com.project.PracticeApp.orm.Practice;
@@ -40,18 +41,73 @@ public class StudentController {
                 student.getPhone(),
                 student.getEmail(),
                 student.getComments(),
-                student.getCompetencies()
+                studentService.joinCompetencies(student.getCompetencies())
         );
+        dto.setName(student.getFullName());
         model.addAttribute("student", dto); // Передаем объект студента в модель
         return "stud_profile"; // Имя шаблона для страницы "О себе"
     }
 
     @PostMapping("/profile")
     public String updateProfile(@ModelAttribute("student") StudentDTO studentDTO, @AuthenticationPrincipal UserDetails userDetails) {
-        logger.info(studentDTO.getCompetencies());
         String username = userDetails.getUsername(); // Получаем имя пользователя
         studentService.updateStudentInfoWithDTO(username, studentDTO);
         return "redirect:/student/profile"; // Перенаправление на страницу профиля
+    }
+
+    @GetMapping("/practice")
+    public String getPracticePage(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        String username = userDetails.getUsername(); // Получаем имя пользователя
+        Student student = studentService.findByUsername(username);
+        Practice practice = student.getPractices().getLast();
+        PracticeDTO dto = null;
+        if (practice.getCompany() != null){
+            if (practice.getCompanyMentor() != null){
+                dto = new PracticeDTO(
+                        practice.getGroupPractice().getCurator().getFullName(),
+                        practice.getGroupPractice().getPeriod(),
+                        practice.getStatus(),
+                        practice.getCompany().getName(),
+                        practice.getCompany().getAddress(),
+                        practice.getCompanyMentor().getName(),
+                        practice.getCompanyMentor().getPhone(),
+                        practice.getCompanyMentor().getEmail()
+                );
+            } else {
+                dto = new PracticeDTO(
+                        practice.getGroupPractice().getCurator().getFullName(),
+                        practice.getGroupPractice().getPeriod(),
+                        practice.getStatus(),
+                        practice.getCompany().getName(),
+                        practice.getCompany().getAddress(),
+                        null,
+                        null,
+                        null);
+            }
+
+        } else {
+            dto = new PracticeDTO(
+                    practice.getGroupPractice().getCurator().getFullName(),
+                    practice.getGroupPractice().getPeriod(),
+                    practice.getStatus(),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+            );
+        }
+        model.addAttribute("practice", dto); // Передаем объект студента в модель
+        return "stud_practice"; // Имя шаблона для страницы "О себе"
+    }
+
+    @PostMapping("/practice")
+    public String updatePractice(@ModelAttribute PracticeDTO practiceDTO, @AuthenticationPrincipal UserDetails userDetails){
+        String username = userDetails.getUsername();
+        Student student = studentService.findByUsername(username);
+        Practice practice = student.getPractices().getLast();
+        practiceService.updatePracticeWithDTO(practice, practiceDTO);
+        return "redirect:/student/practice";
     }
 }
 

@@ -20,7 +20,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         if (role.equals(Role.STUDENT.name())) {
             response.sendRedirect("/student/profile");
         } else if (role.equals(Role.CURATOR.name())) {
-            response.sendRedirect("/teacher/dashboard");
+            response.sendRedirect("/teacher/welcome");
         } else {
             response.sendRedirect("/");
         }

@@ -2,6 +2,7 @@ package com.project.PracticeApp.orm;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,5 +141,6 @@ public class Practice {
         this.preparationNotes.add(note);
         note.setPractice(this);
     }
+
 }
 

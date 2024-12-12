@@ -105,45 +105,60 @@
 <div class="container">
     <h1>Практика студента</h1>
 
-    <form action="/student/practice" method="post" th:object="${practice}">
-        <div class="form-group form-row">
-            <label for="organizationName">Название организации</label>
-            <input type="text" id="organizationName" name="organizationName" th:value="*{organizationName}" class="form-control">
+    <form action="/student/practice" method="post" th:object="${practice}" class="mt-3">
+        <!-- Руководитель практики -->
+        <div class="form-group mb-3">
+            <label for="curator">Руководитель практики</label>
+            <span id="curator" name="curator" th:text="*{curator}" class="form-control"></span>
         </div>
-        <div class="form-group form-row">
-            <label for="organizationAddress">Адрес организации</label>
-            <input type="text" id="organizationAddress" name="organizationAddress" th:value="*{organizationAddress}" class="form-control">
+
+        <!-- Период практики -->
+        <div class="form-group mb-3">
+            <label for="period">Период практики</label>
+            <span id="period" name="period" th:text="*{period}" class="form-control">
         </div>
-        <div class="form-group form-row">
-            <label for="organizationPhone">Телефон организации</label>
-            <input type="text" id="organizationPhone" name="organizationPhone" th:value="*{organizationPhone}" class="form-control">
-        </div>
-        <div class="form-group form-row">
-            <label for="organizationEmail">E-mail организации</label>
-            <input type="email" id="organizationEmail" name="organizationEmail" th:value="*{organizationEmail}" class="form-control">
-        </div>
-        <div class="form-group form-row">
-            <label for="contactPerson">Контактное лицо от организации</label>
-            <input type="text" id="contactPerson" name="contactPerson" th:value="*{contactPerson}" class="form-control">
-        </div>
-        <div class="form-group form-row">
-            <label for="comments">Комментарии к практике</label>
-            <textarea id="comments" name="comments" th:text="*{comments}" class="form-control"></textarea>
-        </div>
-        <div class="form-group form-row">
-            <label for="requirements">Требования организации</label>
-            <textarea id="requirements" name="requirements" th:text="*{requirements}" class="form-control"></textarea>
-        </div>
-        <!-- Статус подготовки -->
-        <div class="form-group form-row">
-            <label for="preparationStatus">Статус подготовки</label>
-            <select id="preparationStatus" name="preparationStatus" th:value="*{preparationStatus}" class="form-control">
-                <option value="NOT_STARTED">Не начато</option>
-                <option value="IN_PROGRESS">В процессе</option>
-                <option value="COMPLETED">Завершено</option>
+
+        <!-- Статус подготовки к практике -->
+        <div class="form-group mb-3">
+            <label for="status">Статус подготовки к практике</label>
+            <select id="status" name="status" th:field="*{status}" class="form-select" onchange="updateStatus()">
+                <option th:value="UNKNOWN">Не начато</option>
+                <option th:value="IN_PROGRESS">В процессе</option>
+                <option th:value="DONE">Взят на практику</option>
             </select>
         </div>
 
+        <!-- Название организации -->
+        <div class="form-group mb-3">
+            <label for="organization">Название организации</label>
+            <input type="text" id="organization" name="organization" th:value="*{organization}" class="form-control" placeholder="Введите название организации">
+        </div>
+
+        <!-- Адрес организации -->
+        <div class="form-group mb-3">
+            <label for="organizationAddress">Адрес организации</label>
+            <input type="text" id="organizationAddress" name="organizationAddress" th:value="*{organizationAddress}" class="form-control" placeholder="Введите адрес организации">
+        </div>
+
+        <!-- Контактное лицо организации -->
+        <div class="form-group mb-3">
+            <label for="contactPerson">Контактное лицо</label>
+            <input type="text" id="contactPerson" name="contactPerson" th:value="*{contactPerson}" class="form-control" placeholder="Введите имя контактного лица">
+        </div>
+
+        <!-- Телефон -->
+        <div class="form-group mb-3">
+            <label for="phone">Телефон</label>
+            <input type="text" id="phone" name="phone" th:value="*{phone}" class="form-control" placeholder="Введите телефон">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" th:value="*{email}" class="form-control" placeholder="Введите email">
+        </div>
+
+        <!-- Кнопка сохранения -->
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 

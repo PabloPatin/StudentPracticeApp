@@ -1,5 +1,7 @@
 package com.project.PracticeApp.orm;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.apache.tomcat.util.digester.ArrayStack;
 
@@ -17,16 +19,18 @@ public class StudentGroup {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
 
     @Column(nullable = false)
     private Short course;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "group")
     private List<GroupPractice> groupPractices = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "group")
     private List<Student> students = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 package com.project.PracticeApp.orm;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -29,7 +30,7 @@ public class GroupPractice {
     @JoinColumn(name = "curator_id", nullable = false)
     private Curator curator;
 
-    @OneToMany(mappedBy = "groupPractice", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "groupPractice", cascade = CascadeType.REMOVE)
     private List<Practice> practices = new ArrayList<>();
 
     protected GroupPractice() {
@@ -98,6 +99,10 @@ public class GroupPractice {
 
     public void addPractices(Practice practice){
         this.practices.add(practice);
+    }
+
+    public String getPeriod(){
+        return String.format("%1$te-%2$te %1$tB %1$tY", this.startDate, this.endDate);
     }
 }
 

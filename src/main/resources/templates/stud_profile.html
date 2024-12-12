@@ -103,7 +103,7 @@
 <body>
 
 <div class="container">
-    <h1>Профиль студента</h1>
+    <h1>Профиль студента<br><span th:text="${student.name}"></span></h1>
 
     <form action="/student/profile" method="post" th:object="${student}">
         <div class="form-group form-row">

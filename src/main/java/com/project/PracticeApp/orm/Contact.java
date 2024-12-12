@@ -29,6 +29,7 @@ public class Contact {
     public Contact(String name, Company company) {
         this.name = name;
         this.company = company;
+        company.addContact(this);
     }
 
     public Contact(String name, String email, String phone, Company company) {

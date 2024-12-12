@@ -14,8 +14,6 @@ import java.util.Optional;
 
 @Service
 public class SiteUserDetailService implements UserDetailsService {
-    private static final Logger logger = LoggerFactory.getLogger(SiteUserDetailService.class);
-
     private final UserRepository userRepository;
 
     public SiteUserDetailService(UserRepository userRepository) {
@@ -27,9 +25,6 @@ public class SiteUserDetailService implements UserDetailsService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         UserDetails details = new SiteUserDetails(user);
-        logger.info(details.getAuthorities().toString());
-        logger.info(details.getPassword());
-        logger.info(details.getUsername());
         return details;
     }
 
