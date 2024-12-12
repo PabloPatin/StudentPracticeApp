@@ -98,10 +98,19 @@
         .form-row .form-control {
             width: 70%;
         }
+        .logout-button {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 <body>
-
+<form action="/logout" method="GET" class="logout-button">
+    <button type="submit" class="btn btn-danger">
+        Logout
+    </button>
+</form>
 <div class="container">
     <h1>Практика студента</h1>
 

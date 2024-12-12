@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "9009:9009"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres/practice_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: student_practice_postgres
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: practice_db
+    ports:
+      - "5435:5432"
+
